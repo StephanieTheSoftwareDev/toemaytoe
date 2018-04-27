@@ -1,0 +1,24 @@
+<a [routerLink]="['']">Home</a>
+<h4>Reviews for {{ restaurant.name }}</h4>
+
+<button [routerLink]="['/write/' + restaurant._id]">Add New Review!</button>
+
+<!-- <p *ngIf="(author.review)">Skills: {{ pet.skill1 }}</p> -->
+
+
+
+<table>
+  <tr>
+    <th title="Name of Customer">Customer</th>
+    <th title="The # of Stars That Customer Gave This Restaurant">Stars</th>
+    <th title="What They Had To Say About This Restaurant?">Description</th>
+  </tr>
+  <tr *ngFor="let info of restaurant.customer">
+    <td>{{ info.name }}</td>
+    <td>{{ info.stars }}</td>
+    <td>{{ info.review }}</td>
+  </tr>
+</table>
+
+
+<!-- <button (click)="deletePet(pet)">Adopt this pet!</button> -->

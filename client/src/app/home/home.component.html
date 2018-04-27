@@ -1,0 +1,24 @@
+<a [routerLink]="['new']">Click here to add a new restaurant!</a>
+<br><br>
+<h3 title="Mmmm!">Here are some restaurants... Check them out!:</h3>
+
+  <table>
+    <tr>
+      <th title="Name of Restaurant">Restaurant</th>
+      <th title="The Type of Cuisine Served at This Restaurant">Cuisine</th>
+      <th title="What would you like to do?">Action</th>
+    </tr>
+    <tr *ngFor="let restaurant of restaurants">
+      <td>{{ restaurant.name }} </td>
+      <td>{{ restaurant.type }}</td>
+
+      <td>
+        <button [routerLink]="['/reviews/' + restaurant._id]">Read Reviews</button>
+        
+        <button [routerLink]="['/edit/' + restaurant._id]">Update</button>
+        
+        <button (click)="deleteRestaurant(restaurant)">Delete</button>
+      
+      </td>
+    </tr>
+  </table>

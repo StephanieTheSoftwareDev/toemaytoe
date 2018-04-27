@@ -1,0 +1,18 @@
+<a [routerLink]="['']">Home</a>
+<h3>Let's Eat!</h3>
+<p> {{ restaurant | json }} </p>
+<!-- The code below prints errors, if there are any -->
+  <p *ngIf="(error)">{{error}}</p>
+
+<!-- The code below creates a form and when a form is submited it goes to the onSubmit() function on newpet.component.ts -->
+<form (submit)="onSubmit()">
+  <!-- Prints the restaurant's details -->
+  <p>Restaurant name: {{newRestaurant.name}}</p>
+  <input type="text" name="newRestaurant.name" [(ngModel)]="newRestaurant.name" />
+  <p>Cuisine: {{newRestaurant.type}}</p>
+  <input type="text" name="newRestaurant.type" [(ngModel)]="newRestaurant.type" />
+  
+  <p></p>
+  <input type="submit" value="Submit Restaurant">
+</form>
+<button [routerLink]="['']" title="Change your mind? This button takes you home!">Cancel</button>

@@ -1,0 +1,17 @@
+<a [routerLink]="['']">Home</a>
+<h3>Edit {{ editRestaurant.name }}'s information:</h3>
+<p> {{ restaurant | json }} </p>
+<p *ngIf="(error)">{{error}}</p>
+
+
+<form (submit)="savePet()">
+
+  <p>Restaurant name:</p>
+  <input type="text" name="editRestaurant.name" [(ngModel)]="editRestaurant.name" />
+  <p>Cuisine type:</p>
+  <input type="text" name="editRestaurant.type" [(ngModel)]="editRestaurant.type" />
+  
+
+  <input type="submit" title="Submit the changes you've made!" value="Submit Changes"/>
+</form>
+<button [routerLink]="['']" title="Change your mind? This button takes you home!">Cancel</button>
