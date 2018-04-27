@@ -8,7 +8,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  editRestaurant: any;
+  editMovie: any;
   error: any;
   constructor(
     private _route: ActivatedRoute,
@@ -17,10 +17,10 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.editRestaurant = this._httpService.restaurant
+    this.editMovie = this._httpService.movie
   }
-  saveRestaurant(){
-    let observable = this._httpService.saveRestaurant(this.editRestaurant);
+  saveMovie(){
+    let observable = this._httpService.saveMovie(this.editMovie);
     observable.subscribe(data => {
       if((data as any).message == "Error") {
         this.error = "All fields need to have at least 3 characters in length"

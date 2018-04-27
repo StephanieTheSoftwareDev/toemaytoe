@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+button{
+    margin-right: 20px;
+    padding: 4px;
+}
+form{
+    display: table;
+}
+p{
+    display: table-row;
+    margin-bottom: 5px;
+}
+label{
+    display: table-cell;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+input{
+    display: table-cell;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+th{
+    padding: 5px;
+}
+td{
+    padding: 5px;
+}
+
+table tr:nth-child(odd) td{
+    border: solid black 1px;
+    background:#ccc;
+}
+table tr:nth-child(even) td{
+    border: solid black 1px;
+     background:#fff;
+}
+.errors{
+    color: red;
+}
+#redButton{
+    background-color: red;
+    color: white;
+}

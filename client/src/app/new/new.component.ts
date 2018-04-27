@@ -8,8 +8,10 @@ import { HttpService } from '../http.service';
   styleUrls: ['./new.component.css']
 })
 export class NewComponent implements OnInit {
-  newRestaurant: any;
+  newMovie: any;
+  newMovieReview: any;
   error: any;
+  selval: any;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -17,19 +19,20 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newRestaurant = { 
+    this.selval = '1';
+    this.newMovie = { 
       name: "",
-      type: "",
+      movie_review: {name: "", stars: "", review:""}
     };
   }
 
   onSubmit(){
-    let observable = this._httpService.addNewRestaurant(this.newRestaurant)
-    let obs = this._httpService.showRestaurantById(this.newRestaurant)
-    console.log("clicked", this.newRestaurant)
+    let observable = this._httpService.addNewMovie(this.newMovie)
+    let obs = this._httpService.showMovieById(this.newMovie)
+    console.log("clicked", this.newMovie)
     observable.subscribe(data => {
       if ((data as any).message == "Error") {
-        this.error = "Must have 3 or more characters in length!"
+        this.error = "Movies must have a title that contain at least 3 characters! \n You must provide your name, which should contain at least 3 characters! \n Your rating must be between 1 and 5 stars! \n You must provide a review of at least 3 characters!"
 
       }
       else {

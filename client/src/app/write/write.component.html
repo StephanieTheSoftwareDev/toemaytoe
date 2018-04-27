@@ -1,6 +1,6 @@
-<a [routerLink]="['']">Home</a>
-<p> {{ restaurant | json }} </p>
-<h3>Write a Review for {{restaurant.name}}</h3>
+<button [routerLink]="['']">Home</button>
+<!-- <p> {{ movie | json }} </p> -->
+<h3>Write a Review for {{movie.name}}</h3>
 <!-- <p> {{ restaurant | json }} </p> -->
 <!-- The code below prints errors, if there are any -->
   <p *ngIf="(error)">{{error}}</p>
@@ -8,20 +8,20 @@
 <!-- The code below creates a form and when a form is submited it goes to the onSubmit() function on new.component.ts -->
 <form (submit)="onSubmit()">
   <!-- Prints the restaurant's details -->
-  <p>Your name: {{newCustomer.name}}</p>
-  <input type="text" name="newCustomer.name" [(ngModel)]="newCustomer.name" />
-  <p>Stars: {{newCustomer.stars}}</p>
-  <select name="newCustomer.stars" id="newCustomer.stars" [(ngModel)]="newCustomer.stars">
-    <option value="1">1</option>
+  <p>Your name: {{newMovieReview.name}}</p>
+  <input type="text" name="newMovieReview.name" [(ngModel)]="newMovieReview.name" />
+  <p>Stars: {{newMovieReview.stars}}</p>
+  <select name="newMovieReview.stars" id="newMovieReview.stars" [(ngModel)]="newMovieReview.stars">
+    <option selected="selected" value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
-  <p>Your Review: {{newCustomer.review}}</p>
-  <input type="text" name="newCustomer.review" [(ngModel)]="newCustomer.review" />
+  <p>Your Review: {{newMovieReview.review}}</p>
+  <input type="text" name="newMovieReview.review" [(ngModel)]="newMovieReview.review" />
   
 
-  <input type="submit" value="Submit Review">
+<input type="submit" value="Submit Review">
 </form>
 <button [routerLink]="['']" title="Change your mind? This button takes you home!">Cancel</button>

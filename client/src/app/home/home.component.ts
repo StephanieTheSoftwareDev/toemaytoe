@@ -8,8 +8,8 @@ import { HttpService } from '../http.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  restaurants = [];
-  restaurant = {};
+  movies = [];
+  movie = {};
 
   constructor(
     private _httpService: HttpService,
@@ -19,15 +19,15 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit() {
-    this.getRestaurants()
+    this.getMovies()
   }
 
-  getRestaurants(){
-    let observable = this._httpService.getRestaurants();
-    console.log("You've entered the getRestaurant function in Home Component!")
+  getMovies(){
+    let observable = this._httpService.getMovies();
+    console.log("getMovies function in home.component.ts!")
     observable.subscribe(data => {
-      console.log("Restaurants!", data["data"])
-      this.restaurants = data["data"];
+      console.log("Movies!", data["data"])
+      this.movies = data["data"];
       // this.restaurants.sort(function (a, b) {
       //   if (a.type < b.type) {
       //     return -1;
@@ -39,13 +39,13 @@ export class HomeComponent implements OnInit {
       // })
     })
   }
-  showRestaurant(restaurant){
-    console.log("Show Restaurant!",restaurant)
-    this._httpService.showRestaurant(restaurant)
+  showMovie(movie){
+    console.log("showMovie func in home.component.ts!",movie)
+    this._httpService.showMovie(movie)
   }
 
-  deleteRestaurant(restaurant) {
-    let observable = this._httpService.deleteRestaurant(restaurant);
+  deleteMovie(movie) {
+    let observable = this._httpService.deleteMovie(movie);
 
     observable.subscribe(data => {
       this._router.navigate(['/'])

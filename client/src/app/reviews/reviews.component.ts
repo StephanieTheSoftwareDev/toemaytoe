@@ -8,8 +8,8 @@ import { HttpService } from '../http.service';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
-  newCustomer: any;
-  restaurant: any;
+  newMovieReview: any;
+  movie: any;
   error: any;
 
   constructor(
@@ -19,18 +19,35 @@ export class ReviewsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newCustomer = [{
+    this.newMovieReview = [{
       name:"",
       stars:"",
       review:"",
     }];
-    this.restaurant = this._httpService.restaurant;
+    this.movie = this._httpService.movie;
+    console.log("onInitfunc in reviews.comonent.ts",this.movie)
+    // this.showMovieById()
   //   this._route.params.subscribe((params: Params) => {
 
       
   //   });
   // }  
   }
+  deleteMovie(movie) {
+    let observable = this._httpService.deleteMovie(movie);
+
+    observable.subscribe(data => {
+      this._router.navigate(['/'])
+    })
+  }
+  // showMovieById(){
+  //   let observable = this._httpService.showMovieById(this.movie);
+  //   console.log("You've entered the getMovieByID function in Reviews Component!")
+  //   observable.subscribe(data => {
+  //     console.log("Movies!", data["data"])
+  //     this.movie = data["data"];
+  //   })
+  // }
   
   // onSubmit(){
   //   let observable = this._httpService.addNewCustomer(this.newCustomer);

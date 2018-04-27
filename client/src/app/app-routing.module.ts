@@ -7,11 +7,11 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { WriteComponent } from './write/write.component';
 
 const routes: Routes = [
-  { path: 'home',component: HomeComponent },
-  { path: 'new', component: NewComponent },
-  { path: 'write/:id',component: WriteComponent },
+  { path: 'movies',component: HomeComponent },
+  { path: 'movies/new', component: NewComponent },
+  { path: 'movies/review/:id',component: WriteComponent },
   { path: 'edit/:id', component: EditComponent },
-  { path: 'reviews/:id', component: ReviewsComponent },
+  { path: 'movies/:id', component: ReviewsComponent },
   { path: '**',component: HomeComponent },
 ];
 

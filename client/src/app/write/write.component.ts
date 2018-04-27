@@ -8,10 +8,11 @@ import { HttpService } from '../http.service';
   styleUrls: ['./write.component.css']
 })
 export class WriteComponent implements OnInit {
-  newCustomer: any;
-  restaurant: any;
+  newMovieReview: any;
+  movie: any;
   error: any;
-  restaurants = [];
+  movies = [];
+  selval: any;
   
   constructor(
     private _route: ActivatedRoute,
@@ -20,30 +21,31 @@ export class WriteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.newCustomer = {name: "", stars: "", review:""};
-    this.restaurant = this._httpService.restaurant;
-    this.getRestaurants()
+    this.selval = '1';
+    this.newMovieReview = {name: "", stars: "", review:""};
+    this.movie = this._httpService.movie;
+    this.getMovies()
   }
-  getRestaurants(){
-    let observable = this._httpService.getRestaurants();
-    console.log("Got the restaurant!", this.restaurant)
+  getMovies(){
+    let observable = this._httpService.getMovies();
+    console.log("getMovies func in write.component.ts", this.movie)
 
     observable.subscribe(data => {
-      console.log("Restaurants!", data["data"])
-      this.restaurants = data["data"];
+      console.log("Movies!", data["data"])
+      this.movies = data["data"];
     })
     
   }
 
   onSubmit(){
-    let observable = this._httpService.addNewCustomer(this.restaurant._id, this.newCustomer);
-    console.log("This new customer is...", this.newCustomer)
+    let observable = this._httpService.addNewMovieReview(this.movie._id, this.newMovieReview);
+    console.log("onSubmit func in write.components.ts", this.newMovieReview)
     observable.subscribe(data => {
       console.log("on Submit function write component!", data);
       if ((data as any).message == "Error") {
-        this.error = "Review needs to be at least 3 characters in length"
+        this.error = "You must provide your name, which should contain at least 3 characters! \n Your rating must be between 1 and 5 stars! \n You must provide a review of at least 3 characters!"
       }else {
-        this._router.navigate(['/reviews/'+ this.restaurant._id])
+        this._router.navigate(['/reviews/'+ this.movie._id])
       }
     })
   }

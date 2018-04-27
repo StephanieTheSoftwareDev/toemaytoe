@@ -19,72 +19,70 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/examDB');
 mongoose.Promise = global.Promise;
 
-var RestaurantSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "The restaurant name needs to be at least 3 characters in length"], minlength: [3, "Name needs to be at least 3 characters"], unique: [true, "Invalid name"]},
-    type: { type: String, required: [true, "The cuisine type needs to be at least 3 characters in length"], minlength: [3, "Type needs to be at least 3 characters"] },
-    customer: [{ 
+var MovieSchema = new mongoose.Schema({
+    name: { type: String, required: [true, "The movie title needs to be at least 3 characters in length"], minlength: [3, "Movie title needs to be at least 3 characters"], unique: [true, "This movie already exists in the database!"]},
+    movie_review: [{ 
         name:{ type: String, required: [true, "Your name needs to be at least 3 characters in length"], minlength: [3, "Name needs to be at least 3 characters"] },
-        stars: { type: String, default:"" },
+        stars: { type: String, default:"1", required: [true, "You need to give a star rating!"] },
         review:{ type: String, required: [true, "Your review needs to be longer.. at least 3 characters in length"], minlength: [3, "Review needs to be at least 3 characters"] },
         }]
     
 },
     { timestamps: true });
 
-mongoose.model('Restaurant', RestaurantSchema);
-var Restaurant = mongoose.model('Restaurant')
+mongoose.model('Movie', MovieSchema);
+var Movie = mongoose.model('Movie')
 //^^^^^^^^^^^^^^^ END of MONGOOSE/DB Section ^^^^^^^^^^^^^^^//
 
 
 //=====*****===== ROUTING Section =====*****=====//
 
-app.post('/newRestaurant', function (req, res) {
+app.post('/newMovie', function (req, res) {
     console.log("POST DATA", req.body);
-    var restaurant = new Restaurant();
-    restaurant.name = req.body.name;
-    restaurant.type = req.body.type;
+    var movie = new Movie();
+    movie.name = req.body.name;
+    movie.movie_review = req.body.movie_review;
 
-    restaurant.save(function (err) {
+    movie.save(function (err) {
         //If there are any errors...
         if (err) {
             //Log restaurant and errors
-            console.log("Errors!", restaurant.errors);
-            res.json({ message: "Error", error: restaurant.errors })
+            console.log("Errors!", movie.errors);
+            res.json({ message: "Error", error: movie.errors })
         //Otherwise, redirect to /  
         }else {
-            console.log('Added a Restaurant!');
-            res.json({ message: "Success", data: restaurant })
+            console.log('Added a Movie!');
+            res.json({ message: "Success", data: movie })
         }
     })
 })
 
 
-app.get('/homeRestaurants', function (req, res) { 
-    Restaurant.find({}, function (err, restaurants) {
+app.get('/homeMovies', function (req, res) { 
+    Movie.find({}, function (err, movies) {
         if (err) {
             console.log("Error", err);
             res.json({ message: "Error", error: err })
 
         }else {
-            res.json({ message: "Success", data: restaurants })
+            res.json({ message: "Success", data: movies })
         }
     })
 })
 
 
-app.put('/editRestaurant/:id', function (req, res) {
-    Restaurant.findOne({ _id: req.params.id }, function (err, restaurant) {
-        if (restaurant) {
-            restaurant.name = req.body.name;
-            restaurant.type = req.body.type;
+app.put('/editMovie/:id', function (req, res) {
+    Movie.findOne({ _id: req.params.id }, function (err, movie) {
+        if (movie) {
+            movie.name = req.body.name;
 
-            restaurant.save(function (err) {
+            movie.save(function (err) {
                 if(err) {
                     console.log("Error!", err);
-                    res.json({ message: "Error", error: restaurant.errors })
+                    res.json({ message: "Error", error: movie.errors })
                 }else {
-                    console.log("Successfully edited the restaurant!");
-                    res.json({ message: "Success", data: restaurant })
+                    console.log("Successfully edited the movie!");
+                    res.json({ message: "Success", data: movie })
                 }
             })
         }
@@ -93,48 +91,48 @@ app.put('/editRestaurant/:id', function (req, res) {
 })
 
 
-app.get('/reviewsRestaurant/:id', function (req, res) {
+app.get('/reviewsMovie/:id', function (req, res) {
     console.log("POST DATA", req.params.id);
-    Restaurant.findOne({ _id: req.params.id }, function (err, restaurant) {
+    Movie.findOne({ _id: req.params.id }, function (err, movie) {
         if(err) {
             console.log("Error!!", err);
             res.json({ message: "Error", error: err })
         }else {
-            console.log('Successfully retrieved a restaurant!');
-            res.json({ message: "Success", data: restaurant })
+            console.log('Successfully retrieved a movie!');
+            res.json({ message: "Success", data: movie })
         }
     })
 })
 
 
-app.put('/writeCustomer/:id', function (req, res) {
-    Restaurant.findOne({ _id: req.params.id }, function (err, restaurant) {
-    restaurant.customer.push(req.body);
+app.put('/writeMovieReview/:id', function (req, res) {
+    Movie.findOne({ _id: req.params.id }, function (err, movie) {
+        movie.movie_review.push(req.body);
 
-    restaurant.save(function (err) {
+        movie.save(function (err) {
         //If there are any errors...
         if (err) {
             //Log restaurant and errors
-            console.log("Errors!", restaurant.errors);
-            res.json({ message: "Error", error: restaurant.errors })
+            console.log("Errors!", movie.errors);
+            res.json({ message: "Error", error: movie.errors })
         //Otherwise, redirect to /  
         }else {
-            console.log('Added a customer!');
-            res.json({ message: "Success", data: restaurant })
+            console.log('Added a movie review!');
+            res.json({ message: "Success", data: movie })
         }
     })
     })
 })
 
 
-app.delete('/deleteRestaurant/:id', function (req, res) {
+app.delete('/deleteMovie/:id', function (req, res) {
     console.log("POST DATA", req.params.id);
-    Restaurant.remove({ _id: req.params.id }, function (err) {
+    Movie.remove({ _id: req.params.id }, function (err) {
         if(err) {
             console.log("Error", err);
             res.json({ message: "Error", error: err })
         }else {
-            console.log('Successfully deleted a restaurant!');
+            console.log('Successfully deleted a movie!');
             res.json({ message: "Success!" })
         }
     })

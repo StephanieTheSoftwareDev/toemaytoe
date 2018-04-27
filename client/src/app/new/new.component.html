@@ -1,18 +1,29 @@
-<a [routerLink]="['']">Home</a>
-<h3>Let's Eat!</h3>
-<p> {{ restaurant | json }} </p>
+<button [routerLink]="['']">Home</button>
+<br><br>
+<p> {{ movie | json }} </p>
 <!-- The code below prints errors, if there are any -->
-  <p *ngIf="(error)">{{error}}</p>
-
+<p class="errors" *ngIf="(error)">{{error}}</p>
+<h3>Submit a movie and your review!</h3>
+<br><br>
 <!-- The code below creates a form and when a form is submited it goes to the onSubmit() function on newpet.component.ts -->
 <form (submit)="onSubmit()">
   <!-- Prints the restaurant's details -->
-  <p>Restaurant name: {{newRestaurant.name}}</p>
-  <input type="text" name="newRestaurant.name" [(ngModel)]="newRestaurant.name" />
-  <p>Cuisine: {{newRestaurant.type}}</p>
-  <input type="text" name="newRestaurant.type" [(ngModel)]="newRestaurant.type" />
+  <p>Movie name: {{newMovie.name}}</p>
+  <input type="text" name="newMovie.name" required minlength="3" [(ngModel)]="newMovie.name" />
+  <p>Your name: {{newMovie.movie_review.name}}</p>
+  <input type="text" name="newMovie.movie_review.name" [(ngModel)]="newMovie.movie_review.name" />
+  <p>Stars: {{newMovie.movie_review.stars}}</p>
+  <select name="newMovie.movie_review.stars" id="newMovie.movie_review.stars" [(ngModel)]="newMovie.movie_review.stars">
+    <option selected="selected" value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <p>Your Review: {{newMovie.movie_review.review}}</p>
+  <input type="text" name="newMovie.movie_review.review" [(ngModel)]="newMovie.movie_review.review" />
   
   <p></p>
-  <input type="submit" value="Submit Restaurant">
+  <input type="submit" value="Submit Movie">
 </form>
 <button [routerLink]="['']" title="Change your mind? This button takes you home!">Cancel</button>

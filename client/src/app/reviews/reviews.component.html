@@ -1,7 +1,10 @@
-<a [routerLink]="['']">Home</a>
-<h4>Reviews for {{ restaurant.name }}</h4>
-
-<button [routerLink]="['/write/' + restaurant._id]">Add New Review!</button>
+<button [routerLink]="['']">Home</button>
+<!-- {{movie | json}} -->
+<button id="redButton" (click)="deleteMovie(movie)">DELETE</button>
+<br><br><br>
+<h4>Reviews for {{ movie.name }}</h4>
+<br><br>
+<button [routerLink]="['/movies/review/' + movie._id]">Add New Review!</button>
 
 <!-- <p *ngIf="(author.review)">Skills: {{ pet.skill1 }}</p> -->
 
@@ -9,11 +12,11 @@
 
 <table>
   <tr>
-    <th title="Name of Customer">Customer</th>
-    <th title="The # of Stars That Customer Gave This Restaurant">Stars</th>
-    <th title="What They Had To Say About This Restaurant?">Description</th>
+    <th title="Name of Reviewer">Reviewer</th>
+    <th title="The # of Stars That Reviewer Gave This Movie">Stars</th>
+    <th title="What They Had To Say About This Movie?">Review</th>
   </tr>
-  <tr *ngFor="let info of restaurant.customer">
+  <tr *ngFor="let info of movie.movie_review">
     <td>{{ info.name }}</td>
     <td>{{ info.stars }}</td>
     <td>{{ info.review }}</td>

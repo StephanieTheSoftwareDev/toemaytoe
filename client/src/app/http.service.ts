@@ -3,32 +3,32 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class HttpService {
-  restaurant: any;
+  movie: any;
 
   constructor(private _http: HttpClient) { }
 
-  getRestaurants(){
-    return this._http.get('/homeRestaurants');
+  getMovies(){
+    return this._http.get('/homeMovies');
   }
-  addNewRestaurant(newRestaurant){
-    return this._http.post('/newRestaurant', newRestaurant)
+  addNewMovie(newMovie){
+    return this._http.post('/newMovie', newMovie)
   }
-  addNewCustomer(id, newCustomer){
-    return this._http.put('/writeCustomer/' + id, newCustomer)
+  addNewMovieReview(id, newMovieReview){
+    return this._http.put('/writeMovieReview/' + id, newMovieReview)
   }
-  showRestaurantById(restaurant){
-    return this._http.get('/reviewsRestaurant/' + restaurant._id, this.restaurant)
+  showMovieById(movie){
+    return this._http.get('/reviewsMovie/' + movie._id, this.movie)
   }
-  showRestaurant(restaurant){
-    console.log("Restaurant", restaurant)
-    this.restaurant = restaurant
+  showMovie(movie){
+    console.log("showMovie func in Service", movie)
+    this.movie = movie
   }
-  saveRestaurant(editRestaurant){
-    this.restaurant = editRestaurant
-    console.log("Restaurant", this.restaurant)
-    return this._http.put('/editRestaurant/' + this.restaurant._id, this.restaurant)
+  saveMovie(editMovie){
+    this.movie = editMovie
+    console.log("saveMovie func in Service", this.movie)
+    return this._http.put('/editMovie/' + this.movie._id, this.movie)
   }
-  deleteRestaurant(restaurant){
-    return this._http.delete('/deleteRestaurant/' + restaurant._id)
+  deleteMovie(movie){
+    return this._http.delete('/deleteMovie/' + movie._id)
   }
 }
